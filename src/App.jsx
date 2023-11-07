@@ -1,11 +1,13 @@
+import { RouterProvider } from 'react-router-dom'
+import router from './routes/Routes'
 import './App.css'
 
 function App() {
 
   return (
-    <>
-      <h1>Pokédex</h1>
-    </>
+    <RouterProvider router={router}>
+      
+    </RouterProvider>
   )
 }
 
