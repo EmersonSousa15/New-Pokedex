@@ -65,7 +65,7 @@ export const PokemonsProvider = ({ children }) => {
     )
 }
 
-export function usePokemons() {
+export const usePokemons = () => {
     return useContext(PokemonsContext);
 }
 

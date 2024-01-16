@@ -6,7 +6,6 @@ const Home = () => {
     const contextPokemons = usePokemons();
     const dispatchPokemons = usePokemonsDispatch();
 
-    console.log(contextPokemons);
 
     return (
         <>
