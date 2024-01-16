@@ -13,7 +13,7 @@ export const ThemeProvider = ({ children }) => {
         } else {
             setTheme(theme.dark);
         }
-    }, [currentTheme])
+    }, [themeString])
 
     return (
         <ThemeContext.Provider value={{ theme, setThemeString }}>
