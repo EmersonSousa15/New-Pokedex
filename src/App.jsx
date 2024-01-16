@@ -1,11 +1,13 @@
 import { RouterProvider, Outlet } from 'react-router-dom'
-import { router } from './routes/Router.jsx'
+import { PokemonsProvider } from './store/contexts/Pokemons/PokemonsContext.jsx'
 
 
 function App() {
 
   return (
-    <Outlet />
+    <PokemonsProvider>
+      <Outlet />
+    </PokemonsProvider>
   )
 }
 
