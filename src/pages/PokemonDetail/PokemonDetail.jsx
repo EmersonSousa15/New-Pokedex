@@ -35,8 +35,6 @@ const PokemonDetail = () => {
         fetchPokemonData();
     }, [])
 
-
-    console.log(isLoading);
     return (
         <>
             <h1>PokemonDetail</h1>

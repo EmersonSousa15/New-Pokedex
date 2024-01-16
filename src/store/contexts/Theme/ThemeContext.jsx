@@ -4,14 +4,14 @@ import { theme as themeObj } from "./theme";
 const ThemeContext = createContext(null);
 
 export const ThemeProvider = ({ children }) => {
-    const [themeString, setThemeString] = useState('light');
+    const [themeString, setThemeString] = useState("light");
     const [theme, setTheme] = useState(themeObj.light);
 
     useEffect(() => {
-        if (themeString == 'light') {
-            setTheme(theme.light);
+        if (themeString === "light") {
+            setTheme(themeObj.light);
         } else {
-            setTheme(theme.dark);
+            setTheme(themeObj.dark);
         }
     }, [themeString])
 

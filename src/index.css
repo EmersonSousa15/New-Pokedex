@@ -7,4 +7,9 @@
     margin: 0;
     outline: 0;
     box-sizing: border-box;
+    font-family: "Press Start 2P", system-ui;
+}
+
+#root {
+    overflow-x: hidden;
 }
