@@ -18,8 +18,8 @@ export const PokemonsProvider = ({ children }) => {
     );
 
     useEffect(() => {
-        if (offset == -1) {
-            setOffset(-2);
+        if (offset <= 0) {
+            setOffset(0);
         }
 
 
@@ -29,21 +29,32 @@ export const PokemonsProvider = ({ children }) => {
             abortControllerRef.current = new AbortController();
 
             try {
-                setInitialValue({ pokeApi: { pokemons: [], setOffset: setOffset }, requestInfo: { isLoading: true, error: { status: false, message: '' } } });
+                setInitialValue({
+                    pokeApi: { pokemons: [], setOffset: setOffset },
+                    requestInfo: { isLoading: true, error: { status: false, message: '' } },
+                });
+
 
                 const response = await fetch(`${MY_URL}/limit=10000&offset=${offset * 20}`, {
                     signal: abortControllerRef.current?.signal,
                 });
                 const data = await response.json();
 
-                setInitialValue({ pokeApi: { pokemons: data.results, setOffset: setOffset }, requestInfo: { isLoading: false, error: { status: false, message: '' } } });
+                setInitialValue({
+                    pokeApi: { pokemons: data.results, setOffset: setOffset },
+                    requestInfo: { isLoading: false, error: { status: false, message: '' } },
+                });
+
 
             } catch (e) {
                 if (e.name === "AbortError") {
                     return;
                 }
 
-                setInitialValue({ pokeApi: { pokemons: [], setOffset: setOffset }, requestInfo: { isLoading: false, error: { status: true, message: e.message } } });
+                setInitialValue({
+                    pokeApi: { pokemons: [], setOffset: setOffset },
+                    requestInfo: { isLoading: false, error: { status: true, message: e.message } },
+                });
             }
         }
 
@@ -54,6 +65,7 @@ export const PokemonsProvider = ({ children }) => {
     useEffect(() => {
         dispatch({ type: 'INITIAL', payload: initialValue })
     }, [initialValue])
+
 
 
     return (
@@ -81,11 +93,11 @@ const pokemonsReducer = (contextPokemons, action) => {
 
             break;
         case 'INCREMENT':
-            pokemons.setOffset(prev => prev += 1)
+            contextPokemons?.pokeApi.setOffset(prev => prev += 1)
 
             break;
         case 'DECREMENT':
-            pokemons.setOffset(prev => prev -= 1);
+            contextPokemons?.pokeApi.setOffset(prev => prev -= 1);
 
             break;
         default:
