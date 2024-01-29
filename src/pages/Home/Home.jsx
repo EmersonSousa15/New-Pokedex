@@ -1,59 +1,74 @@
 import { useState, useEffect, useRef } from "react";
-import { usePokemons, usePokemonsDispatch } from "../../store/contexts/Pokemons/PokemonsContext";
-import Navbar from "../../components/Navbar";
 import Card from "../../components/Card";
 
+const MY_URL = 'https://pokeapi.co/api/v2/pokemon?';
+
 const Home = () => {
-    const contextPokemons = usePokemons();
-    const dispatchPokemons = usePokemonsDispatch();
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
+    const [offset, setOffset] = useState(-1);
+
+    const abortControllerRef = useRef(null);
+
     const [pokemons, setPokemons] = useState([]);
 
     const end = useRef();
-    const initialRender = useRef(false);
 
     useEffect(() => {
-        if (contextPokemons && dispatchPokemons) {
 
-            const intersectionObserverEnd = new IntersectionObserver((entries) => {
-                if (entries.some((entry) => entry.isIntersecting && !contextPokemons?.requestInfo.isLoading && initialRender.current)) {
-                    console.log('end');
-                    dispatchPokemons({ type: 'INCREMENT' })
-                    setPokemons((prev) => [...prev, ...contextPokemons?.pokeApi.pokemons]);
+        const fetchPokemons = async () => {
+            abortControllerRef.current?.abort();
+            abortControllerRef.current = new AbortController();
+
+
+            try {
+                setIsLoading(true);
+
+                const response = await fetch(`${MY_URL}/limit=10000&offset=${offset * 20}`, {
+                    signal: abortControllerRef.current?.signal,
+                });
+                const data = await response.json();
+
+                setPokemons((prev) => [...prev, ...data.results]);
+
+            } catch (e) {
+                if (e.name == "AbortError") {
+                    return;
                 }
-            });
 
-            intersectionObserverEnd.observe(end.current);
-
-            initialRender.current = true;
-
-            return () => intersectionObserverEnd.disconnect();
+                setError(true);
+            } finally {
+                setIsLoading(false);
+            }
         }
-    }, [contextPokemons, dispatchPokemons])
 
+        fetchPokemons();
+
+
+    }, [offset])
+
+
+    useEffect(() => {
+        const intersectionObserverEnd = new IntersectionObserver((entries) => {
+            if (entries.some((entry) => entry.isIntersecting)) {
+                setOffset((prev) => prev += 1);
+            }
+        });
+
+        intersectionObserverEnd.observe(end.current);
+
+        return () => {
+            intersectionObserverEnd.disconnect();
+        };
+    }, [])
 
     return (
         <>
-            <Navbar />
-            <main className="w-full flex justify-center items-center flex-col">
-                <section className="flex gap-3 max-w-screen-md flex-wrap items-center justify-center py-10">
-                    {
-
-                        pokemons?.map((pokemon, index) => (
-                            <Card key={index} pokemonUrl={pokemon?.url} />
-                        ))
-
-                    }
-                    {
-                        (contextPokemons?.requestInfo.isLoading ? (
-                            <p>carregando...</p>
-                        ) : contextPokemons?.requestInfo.error.status ? (
-                            <p>Erro ao carregar pokemons: {contextPokemons?.requestInfo.error.message}</p>
-                        ) : (
-                            contextPokemons?.pokeApi.pokemons.map((pokemon, index) => (
-                                <Card key={index} pokemonUrl={pokemon?.url} />
-                            ))
-                        ))
-                    }
+            <main className="w-full w-min-screen flex justify-center items-center flex-col">
+                <section className="flex gap-3 max-w-screen-md flex-wrap items-center justify-center py-10 overflow-hidden">
+                    {isLoading && <p>carregando...</p>}
+                    {error && <p>Erro ao carregar pokemons</p>}
+                    {pokemons?.map((pokemon, index) => <Card key={index} pokemonUrl={pokemon.url} />)}
                 </section>
                 <div ref={end} className="w-full h-4 bottom-full mt-8"></div>
             </main>

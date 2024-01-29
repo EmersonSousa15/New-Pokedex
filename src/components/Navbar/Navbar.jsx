@@ -4,7 +4,7 @@ import logoPokemon from "../../assets/images/logoPokemon.png"
 import { Link } from "react-router-dom";
 import { useTheme } from "../../store/contexts/Theme/ThemeContext";
 
-const Navbar = () => {
+const Navbar = ({ currentPage }) => {
     const { theme } = useTheme();
 
     return (
@@ -17,9 +17,11 @@ const Navbar = () => {
                         </i>
                     </Link>
                 </div>
-                <div className="w-2/3 flex justify-center">
-                    <img src={logoPokemon} alt="Pokemon" className="w-44" />
-                </div>
+                {currentPage == 'pokemonDetail' ? ' ' :
+                    <div className="w-2/3 flex justify-center">
+                        <img src={logoPokemon} alt="Pokemon" className="w-44" />
+                    </div>
+                }
                 <div className="w-1/3 flex justify-center">
                     <Link to="/user">
                         <i>

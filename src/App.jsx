@@ -1,16 +1,15 @@
 import { RouterProvider, Outlet } from 'react-router-dom'
-import { PokemonsProvider } from './store/contexts/Pokemons/PokemonsContext.jsx'
 import { ThemeProvider } from './store/contexts/Theme/ThemeContext.jsx'
+import Navbar from './components/Navbar/Navbar.jsx'
 
 
 function App() {
 
   return (
-    <PokemonsProvider>
-      <ThemeProvider>
-        <Outlet />
-      </ThemeProvider>
-    </PokemonsProvider>
+    <ThemeProvider>
+      <Navbar />
+      <Outlet />
+    </ThemeProvider>
   )
 }
 
