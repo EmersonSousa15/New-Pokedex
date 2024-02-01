@@ -4,14 +4,18 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       fontSize: {
-        sm: '0.5rem',
+        sm: "0.5rem",
       },
       colors: {
-        'bgCard': '#F2250A',
-        'colorId': '#81BAC3'
+        "orangeRed": "#f2250a",
+        "lightseagreen": "#20cbb8",
+        "gainsboro": "#d6dbde",
+        "mediumaquamarine": "#81bac3",
+        "darkslategray": "#24272e"
       }
     },
   },
