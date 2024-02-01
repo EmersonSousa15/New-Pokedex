@@ -11,7 +11,6 @@ const Home = () => {
     const abortControllerRef = useRef(null);
 
     const [pokemons, setPokemons] = useState([]);
-
     const end = useRef();
 
     useEffect(() => {
@@ -60,15 +59,16 @@ const Home = () => {
         return () => {
             intersectionObserverEnd.disconnect();
         };
+
     }, [])
 
     return (
         <>
-            <main className="w-full w-min-screen flex justify-center items-center flex-col">
+            <main className="w-full bg-gainsboro dark:bg-darkslategray w-min-screen flex justify-center items-center flex-col">
                 <section className="flex gap-3 max-w-screen-md flex-wrap items-center justify-center py-10 overflow-hidden">
                     {isLoading && <p>carregando...</p>}
                     {error && <p>Erro ao carregar pokemons</p>}
-                    {pokemons?.map((pokemon, index) => <Card key={index} pokemonUrl={pokemon.url} />)}
+                    {pokemons?.map((pokemon, index) => <Card key={index} pokemonId={index++} />)}
                 </section>
                 <div ref={end} className="w-full h-4 bottom-full mt-8"></div>
             </main>
