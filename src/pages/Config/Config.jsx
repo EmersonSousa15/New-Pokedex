@@ -16,7 +16,7 @@ const Config = () => {
     }
 
     return (
-        <main className="bg-gainsboro dark:bg-darkslategray m-auto text-center w-screen h-screen">
+        <main className="bg-gainsboro dark:bg-darkslategray m-auto text-center w-screen h-[calc(100vh-5rem)]">
             <section className="w-full py-10 flex flex-col justify-center items-center">
                 <div className="flex w-2/3 justify-between p-3 rounded-md border-4 border-solid  items-center">
                     <h2 className="text-darkslategray dark:text-gainsboro">Dark Mode</h2>

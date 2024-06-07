@@ -27,7 +27,7 @@ const PokemonDetail = () => {
                             </div>
                             <div className="w-72 py-3">
                                 <div className="flex items-center justify-center gap-4 w-full">
-                                    {currentPokemon?.types.map((type) => <p className="ml-5px text-sm/[1px] border-solid border-2 bg-transparent border-darkslategray text-darkslategray dark:border-mediumaquamarine dark:text-mediumaquamarine p-2 rounded-full w-32 capitalize text-center">{type.type.name}</p>)}
+                                    {currentPokemon?.types.map((type, i) => <p key={i} className="ml-5px text-sm/[1px] border-solid border-2 bg-transparent border-darkslategray text-darkslategray dark:border-mediumaquamarine dark:text-mediumaquamarine p-2 rounded-full w-32 capitalize text-center">{type.type.name}</p>)}
                                 </div>
                             </div>
                         </section>

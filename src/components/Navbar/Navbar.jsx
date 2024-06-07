@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Navbar = ({ currentPage }) => {
 
     return (
-        <header className="w-screen bg-gainsboro py-2 dark:bg-darkslategray">
+        <header className="w-screen h-20 bg-gainsboro py-2 dark:bg-darkslategray">
             <nav className="w-full flex items-center justify-center text-center m-auto">
                 <div className="w-1/3 flex justify-center">
                     <Link to="/config">
@@ -23,7 +23,7 @@ const Navbar = ({ currentPage }) => {
                     </div>
                 }
                 <div className="w-1/3 flex justify-center">
-                    <Link to="/user">
+                    <Link to="/profile">
                         <i>
                             <FaRegUserCircle size={30} color="lightseagreen" />
                         </i>
