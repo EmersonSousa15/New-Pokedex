@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom"
+import { createHashRouter } from "react-router-dom"
 
 import Home from "../pages/Home";
 import PokemonDetail from "../pages/PokemonDetail";
@@ -7,7 +7,7 @@ import Config from "../pages/Config";
 import Profile from "../pages/Profile";
 import App from "../App";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
     {
         path: "/",
         element: <App />,
