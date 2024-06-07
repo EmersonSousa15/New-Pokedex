@@ -1,3 +1,4 @@
+import React from "react";
 import { BiSolidError } from "react-icons/bi";
 
 const ErrorUI = () => {

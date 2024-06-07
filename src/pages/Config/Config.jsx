@@ -1,3 +1,4 @@
+import React from "react";
 import { CiLight } from "react-icons/ci";
 import { MdDarkMode } from "react-icons/md";
 import useTheme from "../../hooks/useTheme";

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/uiComponents/Loading";
 import ErrorUI from "../../components/uiComponents/ErrorUI";

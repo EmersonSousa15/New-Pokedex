@@ -1,3 +1,5 @@
+import React from "react";
+
 const Loading = () => {
     return (
         <div className="text-center bg-bgCard w-64 h-28 m-5 my-6 rounded-2xl p-4">

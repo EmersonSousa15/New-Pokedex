@@ -1,3 +1,4 @@
+import React from "react";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import logoPokemon from "../../assets/images/logoPokemon.png"
