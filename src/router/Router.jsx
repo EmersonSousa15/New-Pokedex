@@ -9,7 +9,7 @@ import App from "../App";
 
 export const router = createBrowserRouter([
     {
-        path: "/*",
+        path: "/",
         element: <App />,
         children:
             [
